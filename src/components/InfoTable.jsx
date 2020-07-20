@@ -1,7 +1,8 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 
 const InfoTable = (props) => {
 
+    //findPercentage
     const findPercentage = (total, tocal) => {
         const result = (tocal / total) * 100;
         if (!isNaN(result))
@@ -10,6 +11,7 @@ const InfoTable = (props) => {
             return 0
     }
 
+    //raiseSort
     const raiseSort = ({ path }) => {
         const sortColumn = { ...props.sortColumn }
         if (sortColumn.path === path)
@@ -21,6 +23,7 @@ const InfoTable = (props) => {
         props.onSort(sortColumn);
     };
 
+    //renderSortIcon
     const renderSortIcon = column => {
         const { sortColumn } = props;
 
@@ -34,13 +37,21 @@ const InfoTable = (props) => {
         <Fragment>
             <div className="table-responsive">
                 <table className="table">
+
                     <thead>
-                        <tr>
+                        <tr className="my-1">
                             <th scope="col"
-                                onClick={() => raiseSort({ path: 'country' })}>Country {renderSortIcon({ path: 'country' })} </th>
-                            <th scope="col" onClick={() => raiseSort({ path: 'tests.total' })}>Tested% {renderSortIcon({ path: 'tests.total' })} </th>
-                            <th scope="col" onClick={() => raiseSort({ path: 'deaths.total' })}>Mortality% {renderSortIcon({ path: 'deaths.total' })}</th>
-                            <th scope="col" onClick={() => raiseSort({ path: 'cases.recovered' })}>Recovered% {renderSortIcon({ path: 'cases.recovered' })}</th>
+                                onClick={() => raiseSort({ path: 'country' })}>Country {renderSortIcon({ path: 'country' })}
+                            </th>
+                            <th scope="col" onClick={() => raiseSort({ path: 'tests.total' })}>
+                                Tested% {renderSortIcon({ path: 'tests.total' })}
+                            </th>
+                            <th scope="col" onClick={() => raiseSort({ path: 'deaths.total' })}>
+                                Mortality% {renderSortIcon({ path: 'deaths.total' })}
+                            </th>
+                            <th scope="col" onClick={() => raiseSort({ path: 'cases.recovered' })}>
+                                Recovered% {renderSortIcon({ path: 'cases.recovered' })}
+                            </th>
                             <th scope="col">Infected </th>
                             <th scope="col">Tested </th>
                             <th scope="col">Mortality </th>
@@ -49,9 +60,10 @@ const InfoTable = (props) => {
 
                         </tr>
                     </thead>
+
                     <tbody>
                         {props.data.map(result => (
-                            <tr key={result.country} style={{ backgroundColor: result.deaths.total > 1000 ? '#ffcccb' : '' }}>
+                            <tr key={result.country} style={{ backgroundColor: result.deaths.total > 1000 ? 'rgb(255, 204, 203 , .3)' : '' }}>
                                 <td><strong>{result.country}</strong></td>
                                 <td style={{ color: 'darkgoldenrod' }} > {findPercentage(result.population, result.tests.total)}</td>
                                 <td style={{ color: 'red' }}>{findPercentage(result.cases.total, result.deaths.total)}</td>
@@ -64,6 +76,7 @@ const InfoTable = (props) => {
                             </tr>
                         ))}
                     </tbody>
+
                 </table>
             </div >
 
@@ -71,4 +84,4 @@ const InfoTable = (props) => {
     );
 }
 
-export default memo(InfoTable);
+export default InfoTable;

@@ -51,13 +51,16 @@ const HomoComponent = () => {
                 <h3>COVID-19 Detials for Each Country</h3>
                 <small>To understand what Infected BPS , Tested%, Motality% and Recovered% means <a href="/">click here</a></small>
             </div>
+
             <div className="container my-3">
 
-                {statisticsData.loading && <div style={getStyle()}>
-                    <div className="spinner-border " role="status" style={{ width: '8rem', height: '8rem' }}>
-                        <span className="sr-only">Loading...</span>
+                {statisticsData.loading &&
+                    <div style={getStyle()}>
+                        <div className="spinner-border " role="status" style={{ width: '8rem', height: '8rem' }}>
+                            <span className="sr-only">Loading...</span>
+                        </div>
                     </div>
-                </div>}
+                }
                 {!statisticsData.loading &&
                     <Fragment>
                         <div className="my-2">
@@ -68,7 +71,7 @@ const HomoComponent = () => {
                         <InfoTable data={statisticsDataPaged} onSort={handleSort} sortColumn={sortColumn} />
                     </Fragment>
                 }
-                <div className="table-responsive">
+                <div className="table-responsive my-3">
                     <Pagination
                         itemsCount={statisticsData.data.length}
                         pageSize={pageSize}

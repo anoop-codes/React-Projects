@@ -12,19 +12,42 @@ code {
     monospace;
 }
 
-table thead th {
+table thead th, table th , table td {
   vertical-align: bottom;
-  border-bottom: 1px solid transparent
+  border-bottom: none ! important;
+  border-top: none ! important;
+  padding:10px 25px ! important;
+  font-size: 14px ! important;
+  text-align: right;
 }
 
 table tr th {
-  color: #ffffff;
-  background-color: #33b5e5;
-  border-color: #33b5e5;
-  border-bottom: 1px solid transparent !important;
+   border: none;
+    background-color: #fff3ed;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
 
 }
 
+table tr td:first-child {
+  text-align: left;
+}
+
+table thead th:first-child {
+  border-radius: 10px 0 0 10px;
+  padding-left: 25px;
+  text-align: left;
+  width: 205px;
+
+}
+
+table thead th:last-child {
+  border-radius: 0 10px 10px 0;
+  padding-right: 25px;
+}
 tr td {
     font-size: 15px;
     color: #000000;
@@ -33,19 +56,31 @@ tr td {
 
 .page-item .page-link{
   margin: 0 3px;
-  border-color: #388e3c;
-  border: 1px solid #388e3c;
+  border-color: #fff3ed;
+  border: 1px solid #fff3ed;
   cursor: pointer;
 }
 
 .pagination .page-item.active .page-link{
-  background-color:#388e3c;
- 
+  background-color:#fff3ed;
+  color: #ff1010;
+  border: 1px solid #fff3ed;
+}
+
+.jumbotron {
+  background-color: #fff3ed !important;
 }
 
 
 .my-badge {
-  background-color:#ffcccb;
+  background-color:rgb(255, 204, 203 , .3);
     padding: 0 1.5rem;
     margin-right: 10px;
+}
+
+.fa {
+  position: absolute;
+  font-size: 10px;
+  padding: 5px;
+  color: #ff1010;
 }
