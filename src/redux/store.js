@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { statisticsReducer } from './statistics/statistics-reducer';
+import { newsReducer } from './statistics/news-reducer';
+
 
 const rootReducer = combineReducers({
-    statisticsData: statisticsReducer
+    newsData: newsReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))

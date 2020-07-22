@@ -1,80 +1,42 @@
 import React, { Fragment } from 'react';
+import NewsDetailsRow from '../common/newDetialRow';
+import { useDispatch } from 'react-redux';
+import { hide, incrementVote } from '../redux/statistics/news-actions-types';
 
-const InfoTable = (props) => {
+const InfoTable = ({ newData }) => {
 
-    //findPercentage
-    const findPercentage = (total, tocal) => {
-        const result = (tocal / total) * 100;
-        if (!isNaN(result))
-            return result.toFixed(2);
-        else
-            return 0
-    }
-
-    //raiseSort
-    const raiseSort = ({ path }) => {
-        const sortColumn = { ...props.sortColumn }
-        if (sortColumn.path === path)
-            sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-        else {
-            sortColumn.path = path;
-            sortColumn.order = "asc";
-        }
-        props.onSort(sortColumn);
-    };
-
-    //renderSortIcon
-    const renderSortIcon = column => {
-        const { sortColumn } = props;
-
-        if (column.path !== sortColumn.path) return null;
-        if (sortColumn.order === "asc") return <i className="fa fa-arrow-up" />;
-        return <i className="fa fa-arrow-down" />;
-    };
-
+    const dispatch = useDispatch();
 
     return (
+
         <Fragment>
             <div className="table-responsive">
                 <table className="table">
 
                     <thead>
-                        <tr className="my-1">
-                            <th scope="col"
-                                onClick={() => raiseSort({ path: 'country' })}>Country {renderSortIcon({ path: 'country' })}
-                            </th>
-                            <th scope="col" onClick={() => raiseSort({ path: 'tests.total' })}>
-                                Tested% {renderSortIcon({ path: 'tests.total' })}
-                            </th>
-                            <th scope="col" onClick={() => raiseSort({ path: 'deaths.total' })}>
-                                Mortality% {renderSortIcon({ path: 'deaths.total' })}
-                            </th>
-                            <th scope="col" onClick={() => raiseSort({ path: 'cases.recovered' })}>
-                                Recovered% {renderSortIcon({ path: 'cases.recovered' })}
-                            </th>
-                            <th scope="col">Infected </th>
-                            <th scope="col">Tested </th>
-                            <th scope="col">Mortality </th>
-                            <th scope="col">Recovered</th>
-                            <th scope="col">Population</th>
-
+                        <tr>
+                            <th>comments</th>
+                            <th>Vote Count</th>
+                            <th>UpVote</th>
+                            <th>News Details</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {props.data.map(result => (
-                            <tr key={result.country} style={{ backgroundColor: result.deaths.total > 1000 ? 'rgb(255, 204, 203 , .3)' : '' }}>
-                                <td><strong>{result.country}</strong></td>
-                                <td style={{ color: 'darkgoldenrod' }} > {findPercentage(result.population, result.tests.total)}</td>
-                                <td style={{ color: 'red' }}>{findPercentage(result.cases.total, result.deaths.total)}</td>
-                                <td style={{ color: 'green' }} > {findPercentage(result.cases.total, result.cases.recovered)}</td>
-                                <td>{result.cases.total}</td>
-                                <td>{result.tests.total}</td>
-                                <td>{result.deaths.total}</td>
-                                <td>{result.cases.recovered}</td>
-                                <td>{result.population}</td>
+                        {newData.map(value => (
+                            <tr key={value.objectID}>
+                                <td>{value.num_comments}</td>
+                                <td>{value.points}</td>
+                                <td>
+                                    <i className="fa fa-thumbs-o-up" onClick={() => dispatch(incrementVote(value))} />
+                                </td>
+                                <td>
+                                    <NewsDetailsRow author={value.author} created_at={value.created_at} url={value.url} title={value.title} />
+                                    <button className="btn btn-primary btn-sm" onClick={() => dispatch(hide(value))} style={{ padding: '0px 10px' }}>hide</button>
+                                </td>
                             </tr>
                         ))}
+
                     </tbody>
 
                 </table>

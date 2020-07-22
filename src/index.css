@@ -16,71 +16,66 @@ table thead th, table th , table td {
   vertical-align: bottom;
   border-bottom: none ! important;
   border-top: none ! important;
-  padding:10px 25px ! important;
+  padding:5px 25px ! important;
   font-size: 14px ! important;
-  text-align: right;
+  text-align: center;
+  position: relative;
 }
 
 table tr th {
-   border: none;
+    border: none;
     background-color: #fff3ed;
     padding: 15px;
-    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     position: relative;
 
 }
 
-table tr td:first-child {
-  text-align: left;
-}
 
 table thead th:first-child {
   border-radius: 10px 0 0 10px;
   padding-left: 25px;
-  text-align: left;
-  width: 205px;
 
 }
 
 table thead th:last-child {
   border-radius: 0 10px 10px 0;
-  padding-right: 25px;
+  text-align: left;
+  width: 70%;
 }
+
+table tbody td:last-child {
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
 tr td {
     font-size: 15px;
     color: #000000;
     line-height: 1.4;
 }
 
-.page-item .page-link{
-  margin: 0 3px;
-  border-color: #fff3ed;
-  border: 1px solid #fff3ed;
+
+
+.fa {
+  padding: 5px;
+  color: #ff1010;
   cursor: pointer;
 }
 
-.pagination .page-item.active .page-link{
-  background-color:#fff3ed;
-  color: #ff1010;
-  border: 1px solid #fff3ed;
+.footer {
+  float: right;
 }
 
-.jumbotron {
-  background-color: #fff3ed !important;
+.footer button {
+  border: none;
+  background-color: transparent;
+  outline: none;
 }
 
-
-.my-badge {
-  background-color:rgb(255, 204, 203 , .3);
-    padding: 0 1.5rem;
-    margin-right: 10px;
-}
-
-.fa {
-  position: absolute;
-  font-size: 10px;
-  padding: 5px;
-  color: #ff1010;
+.footer button:last-child {
+    border-left: 1px solid red;
+    line-height: 10px;
 }

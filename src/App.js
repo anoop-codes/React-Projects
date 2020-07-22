@@ -7,7 +7,7 @@ import { store } from './redux/store';
 function App() {
   return (
     <Provider store={store}>
-      <div className="container-fluid">
+      <div className="container my-3">
         <HomoComponent />
       </div>
     </Provider>
