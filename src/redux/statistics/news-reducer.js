@@ -33,7 +33,7 @@ export const newsReducer = (state = initialStateNews, action) => {
         case NEWS_PREVIOUS_PAGE: {
             return {
                 ...state,
-                page: state.page - 1
+                page: state.page > 0 ? state.page - 1 : 0
             }
         }
 

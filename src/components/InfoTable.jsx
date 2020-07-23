@@ -23,10 +23,10 @@ const InfoTable = ({ newData }) => {
                     </thead>
 
                     <tbody>
-                        {newData.map(value => (
+                        {newData && newData.map(value => (
                             <tr key={value.objectID}>
                                 <td>{value.num_comments}</td>
-                                <td>{value.points}</td>
+                                <td >{value.points}</td>
                                 <td>
                                     <i className="fa fa-thumbs-o-up" onClick={() => dispatch(incrementVote(value))} />
                                 </td>

@@ -1,24 +1,39 @@
-import React, { useEffect, Fragment } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { getNewsData } from '../redux/statistics/news-actions-types';
 import InfoTable from './InfoTable';
 import Footer from './Footer';
+import { store } from '../redux/store';
 
-const HomoComponent = () => {
 
-    let { newsData } = useSelector(store => store);
-    const dispatch = useDispatch();
-    const { data, loading, page } = newsData;
+class HomoComponent extends Component {
+    state = {
+        newsDataList: this.props.dataList
+    }
 
-    useEffect(() => {
-        dispatch(getNewsData(page));
+    componentDidMount() {
+        if (!this.props.dataList) {
+            this.props.getData(this.props.dataList.page);
+        }
+    }
 
-        // eslint-disable-next-line
-    }, [page]);
+    componentWillUpdate(preProps, preState) {
+        const { page } = preState.newsDataList;
 
-    data.length > 0 && localStorage.setItem('newsState', JSON.stringify(newsData));
+        if (page !== this.state.newsDataList.page) {
+            this.props.getData(this.props.dataList.page);
+        }
+    }
 
-    const getStyle = () => {
+    componentWillReceiveProps(nextProps) {
+        if (this.state.newsDataList.page !== nextProps.dataList.page) {
+            this.setState({
+                newsDataList: nextProps.dataList
+            })
+        }
+    }
+
+    getStyle() {
         return {
             display: 'flex',
             justifyContent: 'center',
@@ -26,25 +41,42 @@ const HomoComponent = () => {
         }
     }
 
-    return (
-        <>
+    render() {
+        const { data, loading, page } = this.props.dataList;
 
-            {loading &&
-                <div style={getStyle()}>
-                    <div className="spinner-border " role="status" style={{ width: '8rem', height: '8rem' }}>
-                        <span className="sr-only">Loading...</span>
+        return (
+            <>
+
+                {loading &&
+                    <div style={this.getStyle()}>
+                        <div className="spinner-border " role="status" style={{ width: '8rem', height: '8rem' }}>
+                            <span className="sr-only">Loading...</span>
+                        </div>
                     </div>
-                </div>
-            }
-            {
-                !loading &&
-                <Fragment>
-                    <InfoTable newData={data} />
-                    <Footer page={page} />
-                </Fragment>
-            }
-        </>
-    );
+                }
+                {
+                    !loading &&
+                    <Fragment>
+                        <InfoTable newData={data} />
+                        <Footer page={page} />
+                    </Fragment>
+                }
+            </>
+        );
+
+    }
 }
 
-export default HomoComponent;
+function mapStateToProps(state) {
+    return {
+        dataList: state.newsData
+    };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getData: (page) => dispatch(getNewsData(page))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomoComponent);
