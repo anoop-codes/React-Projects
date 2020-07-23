@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import './newDetialRow.css';
+import './news-details-rows.css';
 
 const NewsDetailsRow = ({ author, created_at, url, title }) => {
     return (

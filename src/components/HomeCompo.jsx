@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getNewsData } from '../redux/statistics/news-actions-types';
 import InfoTable from './InfoTable';
 import Footer from './Footer';
-import { store } from '../redux/store';
 
 
 class HomoComponent extends Component {

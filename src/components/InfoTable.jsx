@@ -2,10 +2,12 @@ import React, { Fragment } from 'react';
 import NewsDetailsRow from '../common/newDetialRow';
 import { useDispatch } from 'react-redux';
 import { hide, incrementVote } from '../redux/statistics/news-actions-types';
+import LineChart from '../common/LineChart';
 
 const InfoTable = ({ newData }) => {
 
     const dispatch = useDispatch();
+
 
     return (
 
@@ -41,7 +43,9 @@ const InfoTable = ({ newData }) => {
 
                 </table>
             </div >
-
+            <div className="table-responsive p-3">
+                <LineChart data={newData} />
+            </div>
         </Fragment >
     );
 }
