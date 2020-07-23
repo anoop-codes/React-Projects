@@ -10,12 +10,12 @@ class LineChart extends Component {
     state = {
         data: []
     }
+
     componentDidMount() {
         const data = [];
         this.props.data.forEach((news) => {
             data.push({ name: news.objectID, value: news.points })
         });
-
         this.setState({
             data
         })

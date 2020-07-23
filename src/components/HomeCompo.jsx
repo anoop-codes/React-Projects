@@ -11,18 +11,20 @@ class HomoComponent extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.dataList) {
-            this.props.getData(this.props.dataList.page);
+        const { data, page } = this.props.dataList
+        if (data.length === 0) {
+            this.props.getData(page);
         }
     }
 
-    componentWillUpdate(preProps, preState) {
-        const { page } = preState.newsDataList;
 
+    componentDidUpdate(preProps, preState) {
+        const { page } = preState.newsDataList;
         if (page !== this.state.newsDataList.page) {
             this.props.getData(this.props.dataList.page);
         }
     }
+
 
     componentWillReceiveProps(nextProps) {
         if (this.state.newsDataList.page !== nextProps.dataList.page) {
@@ -66,11 +68,13 @@ class HomoComponent extends Component {
     }
 }
 
+
 function mapStateToProps(state) {
     return {
         dataList: state.newsData
     };
 }
+
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {

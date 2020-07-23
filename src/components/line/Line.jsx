@@ -7,14 +7,12 @@ class Line extends React.Component {
         super();
         this.ref = React.createRef();
     }
+
     componentDidMount() {
         const node = this.ref.current;
         const { data, lineGenerator } = this.props;
 
-        const initialData = data.map(d => ({
-            name: d.name,
-            value: 0
-        }));
+        const initialData = data.map(d => ({ name: d.name, value: 0 }));
 
         select(node)
             .append('path')
@@ -27,24 +25,19 @@ class Line extends React.Component {
 
         this.updateChart()
     }
+
     componentDidUpdate() {
         this.updateChart();
     }
+
+
     updateChart() {
-        const {
-            lineGenerator, data,
-        } = this.props;
-
+        const { lineGenerator, data } = this.props;
         const t = transition().duration(1000);
-
         const line = select('#line');
-
-        line
-            .datum(data)
-            .transition(t)
-            .attr('d', lineGenerator);
-
+        line.datum(data).transition(t).attr('d', lineGenerator);
     }
+
     render() {
         return <g className="line-group" ref={this.ref} />;
     }
