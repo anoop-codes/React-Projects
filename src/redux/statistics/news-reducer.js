@@ -56,7 +56,7 @@ export const newsReducer = (state = initialStateNews, action) => {
 
             return {
                 ...state,
-                cloneData
+                ...cloneData
             }
         }
 
